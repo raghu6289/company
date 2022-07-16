@@ -1,0 +1,28 @@
+{
+  "name": "company",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raghu6289/company.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/raghu6289/company/issues"
+  },
+  "homepage": "https://github.com/raghu6289/company#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.21.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
