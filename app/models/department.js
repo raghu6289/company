@@ -1,19 +1,23 @@
-module.exports=(Sequelize,DataTypes)=>{
-    const department=Sequelize.define("department",{
-        // id:{
-        //     type:DataTypes.INTEGER,
-        //     allowNull:false,
-        //     primaryKey:true,
-        //     autoIncrement:true
-        // },
-        name:{
-            type:DataTypes.STRING,
-            allowNull:false,
+const { DataTypes } = require('sequelize')
+const employee = require('./employee')
+
+// Datatypes directly from sequelize NPM package and config from model/Index file
+module.exports = (Sequelize) => {
+    const department = Sequelize.define("department", {
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        is_active: {
+            type: DataTypes.ENUM("yes", "no"),
+            allowNull: false,
+            defaultValue: "yes"
         }
-    },{
-        paranoid:true,
+    }, {
+        paranoid: true,
         timestamp: true,
-        underscored:true
+        underscored: true
     })
+
     return department
 }
