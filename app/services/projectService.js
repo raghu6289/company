@@ -4,11 +4,11 @@ const createProject = async (deptId, data) => {
   return await projectRepo.createProject({
     name: data.name,
     amount: data.amount,
-    is_ongoing: data.is_ongoing,
-    estimated_date: data.estimated_date,
-    start_date: data.start_date,
-    end_date: data.end_date,
-    dept_id: Number(deptId)
+    isOngoing: data.isOngoing,
+    estimatedDate: data.estimatedDate,
+    startDate: data.startDate,
+    endDate: data.endDate,
+    deptId: Number(deptId)
   })
 }
 

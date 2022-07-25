@@ -10,7 +10,7 @@ const createEmp = async (deptId, data) => {
     email: data.email,
     level: data.level,
     designation: data.designation,
-    dept_id: Number(deptId)
+    deptId: Number(deptId)
   })
 }
 
@@ -26,8 +26,4 @@ const getEmp = async (id) => {
   return await empRepo.getEmp(id)
 }
 
-const getEmpSal = async (id) => {
-  return await empRepo.getEmpSal(id)
-}
-
-module.exports = { createEmp, updateEmp, deleteEmp, getEmp, getEmpSal }
+module.exports = { createEmp, updateEmp, deleteEmp, getEmp }

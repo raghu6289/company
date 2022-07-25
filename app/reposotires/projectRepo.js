@@ -1,6 +1,8 @@
+const { sequelize } = require('../models/index')
 const db = require('../models/index')
 const Department = db.department
 const Project = db.project
+const projectEmployee = db.projectEmployee
 
 const createProject = async (data) => {
   return await Project.create(data)
@@ -19,12 +21,18 @@ const getProject = async (projectId) => {
   const data = await Project.findOne({
     where: {
       id: projectId
-    }, attributes: ["id", "name", "amount", "is_ongoing", "estimated_date", "start_date", "end_date"],
+    }, attributes: ["id", "name", "amount", "isOngoing", "estimatedDate", "startDate", "endDate"],
     include: [
       {
         model: Department,
         as: "department",
         attributes: ['name']
+      }, {
+        model: projectEmployee,
+        where: {
+          projectId: projectId
+        },
+        attributes: [[sequelize.fn('count', 0), 'No of Working Employees']]
       }
     ]
   })
@@ -33,7 +41,7 @@ const getProject = async (projectId) => {
 
 const getAllProject = async () => {
   const data = await Project.findAll({
-    attributes: ["id", "name", "amount", "is_ongoing", "estimated_date", "start_date", "end_date"],
+    attributes: ["id", "name", "amount", "isOngoing", "estimatedDate", "startDate", "endDate"],
     include: [
       {
         model: Department,

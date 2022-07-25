@@ -21,60 +21,72 @@ db.projectEmployee = require('./projectEmployee')(db.sequelize)
 // Department Many Employee and Employee have one Department
 
 db.department.hasMany(db.employee, {
-  foreignKey: "dept_id", sourceKey: "id",
+  foreignKey: "deptId", sourceKey: "id",
   as: "employees"
 })
 
 db.employee.belongsTo(db.department, {
-  foreignKey: "dept_id", targetKey: "id",
+  foreignKey: "deptId", targetKey: "id",
   as: "department"
 })
 
 // Employee to Package
 
 db.employee.hasMany(db.package, {
-  foreignKey: "emp_id", sourceKey: "id",
+  foreignKey: "empId", sourceKey: "id",
   as: "package"
 })
 
 db.package.belongsTo(db.employee, {
-  foreignKey: "emp_id", targetKey: "id",
+  foreignKey: "empId", targetKey: "id",
   as: "employee"
 })
 
 // Employee and Package to Salary
 
 db.employee.hasMany(db.salary, {
-  foreignKey: "emp_id", sourceKey: "id",
+  foreignKey: "empId", sourceKey: "id",
   as: "salary"
 })
 
 db.salary.belongsTo(db.employee, {
-  foreignKey: "emp_id", targetKey: "id",
+  foreignKey: "empId", targetKey: "id",
   as: "employee"
 })
 
-// Projects
+// Deaprtment to Projects
 
 db.department.hasMany(db.project, {
-  foreignKey: "dept_id", sourceKey: "id",
-  as: "projects"
+  foreignKey: "deptId", sourceKey: "id",
+  as: "projects" // Department Projects
 })
 
 db.project.belongsTo(db.department, {
-  foreignKey: "dept_id", targetKey: "id",
+  foreignKey: "deptId", targetKey: "id",
   as: "department"
+})
+
+// Employee to ProjectAssign
+
+db.employee.hasMany(db.projectEmployee, {
+  foreignKey: "empId", sourceKey: "id",
+  as: "projects" // Employee Projects
+})
+
+db.projectEmployee.belongsTo(db.employee, {
+  foreignKey: "empId", targetKey: "id",
+  as: "employee"
 })
 
 // Project Assigned
 
-db.projectEmployee.hasMany(db.employee), {
-  foreignKey: "project_id", sourceKey: "id",
-  as: "projects"
+db.project.hasMany(db.projectEmployee), {
+  foreignKey: "ProjectId", sourceKey: "id",
+  as: "projectemployee"
 }
 
-db.employee.hasMany(db.projectEmployee), {
-  foreignKey: "project_id", sourceKey: "id",
+db.projectEmployee.belongsTo(db.project), {
+  foreignKey: "ProjectId", targetKey: "id",
   as: "projects"
 }
 

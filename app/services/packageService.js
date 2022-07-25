@@ -4,7 +4,7 @@ const createPackage = async (empId, data) => {
   return await packageRepo.createPackage({
     lpa: data.lpa,
     year: data.year,
-    emp_id: Number(empId)
+    empId: Number(empId)
   })
 }
 

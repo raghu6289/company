@@ -2,17 +2,25 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const projectEmployee = sequelize.define("projectEmployee", {
-    status: {
-      type: DataTypes.ENUM("started", "working", "completed"),
-      allowNull: false,
-      default: "started"
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
-    start_date: {
+    startDate: {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    end_date: {
+    endDate: {
       type: DataTypes.DATEONLY
+    },
+    empId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
+    },
+    projectId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
     }
   }, {
     paranoid: true,

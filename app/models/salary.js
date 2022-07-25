@@ -2,11 +2,16 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const salary = sequelize.define("salary", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     grossEarnings: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    monthly_incentive: {
+    monthlyIncentive: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -21,6 +26,10 @@ module.exports = (sequelize) => {
     date: {
       type: DataTypes.DATEONLY,
       allowNull: false
+    },
+    empId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
     },
   }, {
     paranoid: true,

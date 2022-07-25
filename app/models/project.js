@@ -2,6 +2,11 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const project = sequelize.define("project", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false
@@ -10,22 +15,26 @@ module.exports = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    is_ongoing: {
-      type: DataTypes.ENUM("yes", "no"),
+    isOngoing: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: "yes"
+      defaultValue: 1
     },
-    estimated_date: {
+    estimatedDate: {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    start_date: {
+    startDate: {
       type: DataTypes.DATEONLY,
       allowNull: false
     },
-    end_date: {
+    endDate: {
       type: DataTypes.DATEONLY,
       allowNull: false
+    },
+    deptId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
     }
   }, {
     paranoid: true,

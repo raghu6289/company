@@ -6,13 +6,13 @@ const package = db.package
 const createSalary = async (empId, data) => {
   const employee = await package.findOne({
     where: {
-      emp_id: empId
+      empId: empId
     }
   })
   if (!employee) throw new NotFoundError("package not found for the employee")
   const lpaAmount = employee.lpa
   const grossAmount = Math.floor(lpaAmount / 12)
-  const incentive = Math.floor(grossAmount * data.monthly_incentive / 100)
+  const incentive = Math.floor(grossAmount * data.monthlyIncentive / 100)
   const amount = grossAmount + incentive
   const deduction = () => {
     if (lpaAmount < 500000) {
@@ -25,16 +25,17 @@ const createSalary = async (empId, data) => {
       return 15
     }
   }
+
   let taxpercent = deduction()
   const tax = amount * taxpercent / 100
   const netAmount = amount - tax
   return await salaryRepo.createSalary({
     grossEarnings: grossAmount,
-    monthly_incentive: incentive,
+    monthlyIncentive: incentive,
     date: data.date,
     tax: tax,
     netSalary: netAmount,
-    emp_id: Number(empId)
+    empId: Number(empId)
   })
 }
 
@@ -42,4 +43,8 @@ const getSalary = async (id) => {
   return await salaryRepo.getSalary(id)
 }
 
-module.exports = { createSalary, getSalary }
+const getEmpSal = async (id) => {
+  return await salaryRepo.getEmpSal(id)
+}
+
+module.exports = { createSalary, getSalary, getEmpSal }

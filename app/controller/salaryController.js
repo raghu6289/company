@@ -13,6 +13,12 @@ const getSalary = async (req, res) => {
   return res.status(StatusCodes.OK).json(salary)
 }
 
+const getEmpSal = async (req, res) => {
+  const salary = await salaryRepo.getEmpSal(req.params.id)
+  if (salary.length === 0) throw new NotFoundError("item not found")
+  return res.status(StatusCodes.OK).json(salary)
+}
 
 
-module.exports = { createSalary, getSalary }
+
+module.exports = { createSalary, getSalary, getEmpSal }

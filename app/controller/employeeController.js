@@ -70,7 +70,20 @@ const getEmpDetails = async (req, res) => {
     return res.status(StatusCodes.OK).json({ packages, nbHits: packages.length })
   }
 
-  let employees = await Employee.findAll({ where: { ...queryObject }, attributes: ["id", "name", "phoneNumber", "doj", "dob", "level", "designation"] })
+  console.log("Query : ", { where: { ...queryObject } });
+
+  // let employees = await Employee.findAll({ where: { ...queryObject }, attributes: ["id", "name", "phoneNumber", "doj", "dob", "level", "designation"] })
+
+  let employees = await Employee.findAll({
+    where: {
+      name: { [Op.like]: `%${name}%` },
+      isActive: is_active,
+      designation: { [Op.like]: `%${designation}%` },
+      level: { [Op.like]: `%${level}%` }
+    },
+    attributes: ["id", "name", "phoneNumber", "doj", "dob", "level", "designation", "isActive"]
+  })
+
   if (employees.length == 0) throw new NotFoundError("result not found")
   return res.status(StatusCodes.OK).json({ employees, nbHits: employees.length })
 }
@@ -82,8 +95,11 @@ const createEmp = async (req, res) => {
 
 const updateEmp = async (req, res) => {
   const emp = await empService.updateEmp(req.params.id, req.body)
-  if (!emp) throw new NotFoundError("item not found")
-  return res.status(StatusCodes.OK).json("Successfully Updated")
+  if (!Number(emp)) {
+    throw new NotFoundError("item not found")
+  } else {
+    return res.status(StatusCodes.OK).json("Successfully Updated")
+  }
 }
 
 const deleteEmp = async (req, res) => {
@@ -99,11 +115,14 @@ const getEmp = async (req, res) => {
 }
 
 
-const getEmpSal = async (req, res) => {
-  const emp = await empService.getEmpSal(req.params.id)
-  if (emp.length === 0) throw new NotFoundError("item not found")
-  return res.status(StatusCodes.OK).json(emp)
-}
 
 
-module.exports = { createEmp, updateEmp, deleteEmp, getEmp, getEmpSal, getEmpDetails }
+
+
+
+
+
+
+
+
+module.exports = { createEmp, updateEmp, deleteEmp, getEmp, getEmpDetails }

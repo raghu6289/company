@@ -2,7 +2,8 @@ const db = require('../models/index')
 const Employee = db.employee
 const Dept = db.department
 const Package = db.package
-const Salary = db.salary
+const ProjectAssign = db.projectEmployee
+const Project = db.project
 
 const createEmp = async (data) => {
   return await Employee.create(data)
@@ -21,12 +22,21 @@ const getEmp = async (empId) => {
   const data = await Employee.findOne({
     where: {
       id: empId
-    }, attributes: ["id", "name", "phoneNumber", "address", "doj", "dob", "level", "email", "designation", "is_active"],
+    }, attributes: ["id", "name", "phoneNumber", "address", "doj", "dob", "level", "email", "designation", "isActive"],
     include: [
       {
         model: Dept,
         as: "department",
         attributes: ['name']
+      },
+      {
+        model: ProjectAssign,
+        as: "projects",
+        attributes: ["projectId"],
+        include: [{
+          model: Project,
+          attributes: ["name"]
+        }],
       },
       {
         model: Package,
@@ -38,20 +48,5 @@ const getEmp = async (empId) => {
   return data
 }
 
-const getEmpSal = async (empId) => {
-  const data = await Employee.findAll({
-    where: {
-      id: empId,
-    }, attributes: ["id", "name", "doj", "level", "designation",],
-    include: [
-      {
-        model: Salary,
-        as: "salary",
-        attributes: ["date", "grossEarnings", "monthly_incentive", "tax", "netSalary"]
-      }
-    ]
-  })
-  return data
-}
 
-module.exports = { createEmp, updateEmp, deleteEmp, getEmp, getEmpSal }
+module.exports = { createEmp, updateEmp, deleteEmp, getEmp }

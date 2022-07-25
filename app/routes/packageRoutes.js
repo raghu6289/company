@@ -5,7 +5,7 @@ const validator = createValidator()
 const router = require('express').Router()
 
 
-router.post('/emp/:id/', validator.body(packageValidation), packageContoller.createPackage)
+router.post('/empId/:id/', validator.body(packageValidation), packageContoller.createPackage)
 router.patch('/:id', validator.body(packageValidation), packageContoller.updatePackage)
 
 router.get('/:id', packageContoller.getPackage)

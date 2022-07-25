@@ -2,6 +2,11 @@ const { DataTypes } = require('sequelize')
 
 module.exports = (sequelize) => {
   const employee = sequelize.define("employee", {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
+    },
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -34,10 +39,14 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    is_active: {
-      type: DataTypes.ENUM("yes", "no"),
+    isActive: {
+      type: DataTypes.BOOLEAN,
       allowNull: false,
-      defaultValue: "yes"
+      defaultValue: 1
+    },
+    deptId: {
+      type: DataTypes.INTEGER,
+      foreignKey: true
     }
   }, {
     paranoid: true,

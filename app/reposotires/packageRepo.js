@@ -18,7 +18,7 @@ const getPackage = async (packageId) => {
     include: [{
       model: Employee,
       as: "employee",
-      attributes: ["id", "name", "level", "designation", "is_active"]
+      attributes: ["id", "name", "level", "designation", "isActive"]
     }]
   })
   return data
