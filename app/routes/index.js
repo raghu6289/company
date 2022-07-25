@@ -19,7 +19,7 @@ router.use("/employee", empRouter)
 router.use("/package", packageRouter)
 router.use("/salary", salaryRouter)
 router.use("/project", projectRouter)
-router.use("/assign", projectAssignRouter)
+router.use("/projects", projectAssignRouter)
 
 
 module.exports = router

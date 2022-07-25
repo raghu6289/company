@@ -5,9 +5,9 @@ const validator = createValidator()
 const router = require('express').Router()
 
 
-router.post('/empId/:id/', validator.body(salaryValidation), salaryController.createSalary)
+router.post('/employee/:id/', validator.body(salaryValidation), salaryController.createSalary)
 
-router.get('/empId/:id', salaryController.getEmpSal)
+router.get('/employee/:id', salaryController.getEmpSal)
 
 router.get('/:id', salaryController.getSalary)
 

@@ -5,7 +5,7 @@ const validator = createValidator()
 const router = require('express').Router()
 
 
-router.post('/deptId/:id/', validator.body(empValidation), empController.createEmp)
+router.post('/department/:id/', validator.body(empValidation), empController.createEmp)
 router.patch('/:id', validator.body(empValidation), empController.updateEmp)
 
 router.delete('/:id', empController.deleteEmp)

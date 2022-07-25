@@ -19,7 +19,6 @@ const getAllDept = async (req, res) => {
   return res.status(StatusCodes.OK).json(dept)
 }
 
-
 const deleteDept = async (req, res) => {
   const dept = await deptService.deleteDept(req.params.id)
   if (!dept) throw new NotFoundError("item not found")

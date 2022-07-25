@@ -5,7 +5,7 @@ const validator = createValidator()
 const router = require('express').Router()
 
 
-router.post('/deptId/:id/', validator.body(projectValidation), prjectController.createProject)
+router.post('/department/:id/', validator.body(projectValidation), prjectController.createProject)
 router.patch('/:id/', validator.body(projectValidation), prjectController.updateProject)
 
 router.get('/', prjectController.getAllProject)
